@@ -13,7 +13,7 @@ GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 while True:
     i = 0
     j=0
-    if GPIO.input(button_pin):
+    if not GPIO.input(button_pin):
         for i in range(0,255):
             for j in range(0,8):
                 if ( ( (i >> j) & 1 )  == 1 ):
