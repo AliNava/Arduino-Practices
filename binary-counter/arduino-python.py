@@ -18,6 +18,9 @@ while True:
     j=0
     if not GPIO.input(button_pin):
         for i in range(0,255):
+            while GPIO.input(button_send_pin):
+                print "esperando a enviar"
+                time.sleep(1)
             serial_string = ""
             for j in range(0,8):
                 if ( ( (i >> j) & 1 )  == 1 ):
@@ -26,10 +29,6 @@ while True:
                 else:
                     GPIO.output(pins[j],0)
                     serial_string += str(arduino_pins[j]) + ",0-"
-            while GPIO.input(button_send_pin):
-                print "esperando a enviar"
-                time.sleep(1)
-                
             arduino.write(serial_string.encode())
             print serial_string
             time.sleep(2)
