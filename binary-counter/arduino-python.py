@@ -15,14 +15,16 @@ while True:
     j=0
     if not GPIO.input(button_pin):
         for i in range(0,255):
+            serial_string = ""
             for j in range(0,8):
                 if ( ( (i >> j) & 1 )  == 1 ):
                     print((str(pins[j]) + ",1").encode())
-				    #arduino.write((str(pins[j]) + ",1").encode())
                     GPIO.output(pins[j],1)
+                    serial_string += str(pins[j]) + ",1-"
                 else:
                     print((str(pins[j]) + ",0").encode())
-				    #arduino.write((str(pins[j]) + ",0").encode())
                     GPIO.output(pins[j],0)
+                    serial_string += str(pins[j]) + ",0-"
+            #arduino.write((str(pins[j]) + ",1").encode())
+            print serial_string
             time.sleep(1)
-            print("--------------     ")
