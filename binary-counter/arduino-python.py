@@ -24,5 +24,5 @@ while True:
                     print((str(pins[j]) + ",0").encode())
 				    #arduino.write((str(pins[j]) + ",0").encode())
                     GPIO.output(pins[j],0)
-                time.sleep(1)
+            time.sleep(1)
             print("--------------     ")
