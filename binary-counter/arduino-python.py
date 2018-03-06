@@ -10,6 +10,8 @@ for i in pins:
 arduino = serial.Serial('/dev/ttyACM0', 2000000)
 button_pin = 23
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+button_send_pin = 18
+GPIO.setup(button_send_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
     i = 0
@@ -24,6 +26,10 @@ while True:
                 else:
                     GPIO.output(pins[j],0)
                     serial_string += str(arduino_pins[j]) + ",0-"
+            while GPIO.input(button_send_pin):
+                print "esperando a enviar"
+                time.sleep(1)
+                
             arduino.write(serial_string.encode())
             print serial_string
             time.sleep(2)
