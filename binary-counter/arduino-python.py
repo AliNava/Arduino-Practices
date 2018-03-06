@@ -7,7 +7,7 @@ pins=[21,20,16,12,7,8,25,24]
 for i in pins:
     GPIO.setup(i, GPIO.OUT, initial=GPIO.LOW)
 #arduino = serial.Serial('/dev/ttyACM0', 2304000)
-button_pin = 22
+button_pin = 23
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
