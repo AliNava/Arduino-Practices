@@ -1,7 +1,13 @@
+import RPi.GPIO as GPIO
 import time
 import serial
-pins=[2,3,4,5,6,7,8,9]
-arduino = serial.Serial('/dev/ttyACM0', 2304000)
+
+GPIO.setmode(GPIO.BCM)
+pins=[21,20,16,12,7,8,25,24]
+for i in pins:
+    GPIO.setup(i, GPIO.OUT, initial=GPIO.LOW)
+
+#arduino = serial.Serial('/dev/ttyACM0', 2304000)
 while True:
 	i = 0
 	j=0
@@ -9,9 +15,12 @@ while True:
 		for j in range(0,8):
 			if ( ( (i >> j) & 1 )  == 1 ):
 				print((str(pins[j]) + ",1").encode())
-				arduino.write((str(pins[j]) + ",1").encode())
+				#arduino.write((str(pins[j]) + ",1").encode())
+				GPIO.output(pins[j],1)
 			else:
 				print((str(pins[j]) + ",0").encode())
-				arduino.write((str(pins[j]) + ",0").encode())
+				#arduino.write((str(pins[j]) + ",0").encode())
+				GPIO.output(pins[j],0)
 			time.sleep(1)
-		print("-------------")
+		print("--------------     ")
+
